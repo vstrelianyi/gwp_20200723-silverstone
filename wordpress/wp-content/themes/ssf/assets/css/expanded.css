@@ -6457,23 +6457,18 @@ body.blue-style .page-header__logo img.main-logo-blue {
 
 
 .item-card__tag.new-item{
-	background-color: rgba(255, 255, 255, .5);
-	opacity: .8;
-	color: #f00;
-	width: 70%;
-	font-size: 1.5em;
-	text-transform: uppercase;
-	text-align: center;
-	left: 15%;
-	right: 15%;
-	top: 0;
-	bottom: 50%;
-	border-radius: 0;
-	line-height: normal;
-	padding: 20px 0;
+	/* transform: rotate(-45deg); */
+	top: 0px;
+	right: 0px;
+	padding-right: 15px;
+	background-color: #344B8E;
+	color: #fff;
+	width: auto;
 	height: auto;
-	z-index: 10;
-	box-shadow: none;
+	padding: 20px 30px;
+	font-size: 20px;
+	border-top-right-radius: 0px ;
+	border-bottom-right-radius: 0px ;
 }
 
 .item-card__tag.top-sales {
