@@ -10,7 +10,6 @@ wordpress/wp-content/*.*
 wordpress/wp-content/uploads/
 wordpress/wp-content/languages/
 wordpress/wp-content/ai1wm-backups/
-
 wordpress/wp-content/mu-plugins/*
 wordpress/wp-content/plugins/*
 !wordpress/wp-content/plugins/cgb-theme
