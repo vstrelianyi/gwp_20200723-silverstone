@@ -1,0 +1,341 @@
+
+.become-dealer {
+    width: 100%;
+    background-color: #fff;
+    background-image: url(../img/become-dealer-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    &__row {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__form {
+        background-color: #fff;
+        box-shadow: 0 2px 24px 0 rgba(0, 0, 0, .07);
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 45px;
+        .input-addon {
+            position: absolute;
+        }
+        .form-title {
+            letter-spacing: .025em;
+            font-size: 28px;
+            text-align: center;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 35px;
+        }
+        .input-wrapper {
+            margin-bottom: 20px;
+        }
+        .submit-button {
+            margin: 50px auto;
+            &:before {
+                border-color: #000;
+                background-color: rgba(0, 0, 0, .02);
+            }
+        }
+        .text-input, .textarea-input {
+            padding-left: 55px;
+        }
+    }
+    &__process-item {
+        position: relative;
+        z-index: 5;
+        display: block;
+        .inner {
+            position: relative;
+            z-index: 3;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding-top: 25px;
+            background-color: #fff;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .1);
+        }
+        .item-icon {
+            width: 100%;
+            text-align: center;
+            color: #344B8E;
+            font-size: 45px;
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+        .item-content {
+            color: #2c2c2c;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+        }
+        &:before {
+            content: "";
+            display: block;
+            width: 64px;
+            height: 12px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-image: url(../img/become-arrow.png);
+            position: absolute;
+            z-index: 1;
+        }
+        &:last-child:before {
+            display: none;
+        }
+    }
+    
+}
+.brand-title .accent {
+    color: #344B8E;
+}
+@media screen and (max-width:767px) {
+    .become-dealer {
+        padding-top: 30px;
+        padding-bottom: 50px;
+    }
+    .become-dealer .brand-title {
+        max-width: 220px;
+        text-align: center;
+        margin: 0 auto 25px;
+    }
+    .become-dealer__row {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .become-dealer__form {
+        width: 100%;
+        padding: 25px 15px 30px;
+    }
+    .become-dealer__form .form-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    .become-dealer__process {
+        width: 100%;
+        display: block;
+        margin-bottom: 40px;
+    }
+    .become-dealer__process-item {
+        width: 100%;
+        height: 170px;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .1);
+    }
+    .become-dealer__process-item .inner {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+    .become-dealer__process-item:not(:last-child) {
+        margin-bottom: 30px;
+    }
+    .become-dealer__process-item:before {
+        transform: rotate(90deg);
+        bottom: -2px;
+        left: 50%;
+        margin-left: -32px;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1199px) {
+    .become-dealer__process-item:nth-child(1):before, .become-dealer__process-item:nth-child(5):before {
+        top: 50%;
+        right: -25px;
+        margin-top: -6px;
+    }
+    .become-dealer {
+        padding-top: 40px;
+        padding-bottom: 55px;
+    }
+    .become-dealer .brand-title {
+        max-width: 680px;
+        text-align: center;
+        margin: 0 auto 35px;
+    }
+    .become-dealer__row {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .become-dealer__form {
+        width: 100%;
+        padding-bottom: 50px;
+    }
+    .become-dealer__process {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+    .become-dealer__process-item {
+        width: 48%;
+        height: 170px;
+    }
+    .become-dealer__process-item .inner {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+    .become-dealer__process-item:nth-child(n+3) {
+        margin-top: 20px;
+    }
+    .become-dealer__process-item:nth-child(1) {
+        order: 1;
+    }
+    .become-dealer__process-item:nth-child(2) {
+        order: 2;
+    }
+    .become-dealer__process-item:nth-child(2):before {
+        transform: rotate(90deg);
+        left: 50%;
+        margin-left: -32px;
+        bottom: 8px;
+    }
+    .become-dealer__process-item:nth-child(3) {
+        order: 4;
+    }
+    .become-dealer__process-item:nth-child(3):before {
+        transform: rotate(180deg);
+        top: 50%;
+        margin-top: -6px;
+        left: -25px;
+    }
+    .become-dealer__process-item:nth-child(4) {
+        order: 3;
+    }
+    .become-dealer__process-item:nth-child(4):before {
+        transform: rotate(90deg);
+        left: 50%;
+        margin-left: -32px;
+        bottom: 8px;
+    }
+    .become-dealer__process-item:nth-child(5) {
+        order: 5;
+    }
+    .become-dealer__process-item:nth-child(6) {
+        order: 6;
+    }
+}
+@media screen and (min-width:1200px) {
+    .become-dealer {
+        padding-top: 40px;
+        padding-bottom: 55px;
+    }
+    .become-dealer .brand-title {
+        max-width: 680px;
+        text-align: center;
+        margin: 0 auto 35px;
+    }
+    .become-dealer__form {
+        width: 515px;
+        padding-bottom: 50px;
+    }
+    .become-dealer__process {
+        width: 570px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-content: space-between;
+        flex-wrap: wrap;
+        align-self: center;
+    }
+    .become-dealer__process-item {
+        width: 255px;
+        height: 170px;
+        margin: 20px 0;
+    }
+    .become-dealer__process-item:nth-child(1) {
+        order: 1;
+    }
+    .become-dealer__process-item:nth-child(1):before {
+        top: 50%;
+        margin-top: -6px;
+        right: -55px;
+    }
+    .become-dealer__process-item:nth-child(1) .impulse {
+        display: block;
+        position: absolute;
+        top: 50%;
+        margin-top: -5px;
+        right: -35px;
+        width: 10px;
+        height: 10px;
+        background-color: #344B8E;
+        border-radius: 50%;
+        z-index: 3;
+    }
+    .become-dealer__process-item:nth-child(1) .impulse:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        width: 15px;
+        height: 15px;
+        transform: translate(-50%, -50%);
+        border: none;
+        border-radius: 50%;
+        background: #344B8E;
+        transition: all .9s ease-out;
+        cursor: pointer;
+        z-index: 1;
+        animation: circle1 1s linear infinite;
+    }
+    .become-dealer__process-item:nth-child(2) {
+        order: 2;
+    }
+    .become-dealer__process-item:nth-child(2):before {
+        transform: rotate(90deg);
+        left: 50%;
+        margin-left: -32px;
+        bottom: -5px;
+    }
+    .become-dealer__process-item:nth-child(3) {
+        order: 4;
+    }
+    .become-dealer__process-item:nth-child(3):before {
+        transform: rotate(180deg);
+        top: 50%;
+        margin-top: -6px;
+        left: -55px;
+    }
+    .become-dealer__process-item:nth-child(4) {
+        order: 3;
+    }
+    .become-dealer__process-item:nth-child(4):before {
+        transform: rotate(90deg);
+        left: 50%;
+        margin-left: -32px;
+        bottom: -5px;
+    }
+    .become-dealer__process-item:nth-child(5) {
+        order: 5;
+    }
+    .become-dealer__process-item:nth-child(5):before {
+        top: 50%;
+        margin-top: -6px;
+        right: -55px;
+    }
+    .become-dealer__process-item:nth-child(6) {
+        order: 6;
+    }
+}
+@keyframes circle1 {
+    0% {
+    width: 10px;
+    height: 10px;
+    opacity: .5;
+    }
+    70% {
+        width: 25px;
+        height: 25px;
+        opacity: .3;
+    }
+    100% {
+        width: 25px;
+        height: 25px;
+        opacity: 0;
+    }
+}

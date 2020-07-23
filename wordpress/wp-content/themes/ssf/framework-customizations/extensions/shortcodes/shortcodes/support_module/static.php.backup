@@ -1,0 +1,283 @@
+<?php if (!defined('FW')) die('Forbidden');
+
+if(!class_exists('SupportQuestions')){
+
+    class SupportQuestions {
+
+        /*
+         * 3 type questions = general, product_category, product
+         */
+
+        /*
+         *  unified data structure
+         *
+         *  single question answer group = [
+         *
+         *      'index' => [
+         *
+         *            'group_id'   => 'unique-id',
+         *            'group_type' => 'unique-id',
+         *            'icon'       => 'icon-class',
+         *            'name'       => 'group-name',
+         *            'qa'         => [
+         *
+         *                ['id' => 'unique-id', 'question' => 'text', 'answer' => 'text']
+         *                ['id' => 'unique-id', 'question' => 'text', 'answer' => 'text']
+         *                ['id' => 'unique-id', 'question' => 'text', 'answer' => 'text']
+         *
+         *            ]
+         *      ],
+         *
+         *  ]
+         *
+         */
+
+
+        public $general_questions, $product_category_questions, $product_questions;
+
+        public $group_list = [];
+
+        public function __construct( $product = null )
+        {
+            if($product){
+                $this->group_list = array_merge( $this->db_get_product_questions($product), $this->db_get_general_questions() );
+                $this->product = $product;
+            }
+            else{
+                $this->group_list = array_merge( $this->db_get_general_questions(), $this->db_get_product_category_questions() );
+            }
+        }
+
+        public function isDisplayProduct(){
+            return isset($this->product);
+        }
+        // render
+
+        public function render_qa_groups(){
+            foreach ( $this->group_list as $key => $single_group ) {
+                $this->render_qa_group($single_group, $key == 0);
+            }
+        }
+
+        public function render_qa_group($single_group , $active = false, $echo = true){
+            if(!empty($single_group)) {
+
+                $html = '<div class="support-block__tab-content'.($active ? ' active' : '').'" id="'.(!empty($single_group['group_id']) ? $single_group['group_id'] : '').'">';
+                $html .= '<div class="title">'.(!empty($single_group['name']) ? $single_group['name'] : '').'</div>';
+
+                if(!empty($single_group['qa']) && is_array($single_group['qa'])){
+                    foreach ($single_group['qa'] as $single_qa){
+                        $html .= '<div id="'.(!empty($single_qa['id']) ? $single_qa['id'] : "").'" class="support-block__help-item">';
+                        $html .=    '<div class="questi">'.(!empty($single_qa['question']) ? $single_qa['question'] : "").'</div>';
+                        $html .=    '<div class="answer">'.(!empty($single_qa['answer']) ? $single_qa['answer'] : "").'</div>';
+                        $html .= '</div>';
+                    }
+                }
+
+                $html .= '<a href="javascript:;" class="support-block__show-more">';
+                $html .= '<span>Показать ещё</span>';
+                $html .= '<i class="icon-chevron"></i>';
+                $html .= '</a>';
+                $html .= '</div>';
+                if($echo){
+                    echo $html;
+                }
+                else{
+                    return $html;
+                }
+            }
+        }
+
+        public function render_list() {
+            foreach ( $this->group_list as $key => $single_group ) {
+                $this->render_group_link($single_group, $key == 0);
+            }
+        }
+
+        public function render_group_link( $single_group , $active = false, $echo = true){
+            if(!empty($single_group)){
+
+                $html = '<a href="javascript:;" class="'.($active ? 'active' : '').'" data-toggle="tab" data-target="#'.(!empty($single_group['group_id']) ? $single_group['group_id'] : '').'">';
+                $html .= '<i class="'.(!empty($single_group['icon']) ? $single_group['icon'] : '').'"></i>';
+                $html .= '<span>'.(!empty($single_group['name']) ? $single_group['name'] : '').'</span>';
+                $html .= '<i class="icon-chevron"></i>';
+                $html .= '</a>';
+                if($echo){
+                    echo $html;
+                }
+                else{
+                    return $html;
+                }
+            }
+        }
+
+        // render seacrh list
+
+        public function render_questions_list(){
+
+            $search_groups = array_merge($this->get_general_questions(), $this->get_product_category_questions());
+
+            if(!empty($search_groups) && is_array($search_groups)) {
+
+                echo '<ul>';
+                foreach ($search_groups as $group){
+
+                    $group_id = !empty($group['group_id']) ? $group['group_id'] : '';
+
+                    if(!empty($group['qa']) && is_array($group['qa'])) {
+                        foreach ($group['qa'] as $qa) {
+
+                            if( empty($qa['id']) || empty($qa['question']) ) continue;
+
+                            echo '<li class="s_qa_item" data-group-id="'.$group_id.'" data-question-id="'.$qa['id'].'">'.(!empty($qa['question']) ? $qa['question'] : '').'</li>';
+                        }
+                    }
+                }
+                echo '</ul>';
+            }
+        }
+
+        // get and return
+        public function get_general_questions(){
+            if(empty($this->general_questions)){
+                $this->general_questions = $this->db_get_general_questions();
+            }
+            return $this->general_questions;
+        }
+
+        public function get_product_category_questions(){
+            if(empty($this->product_category_questions)){
+                $this->product_category_questions = $this->db_get_product_category_questions();
+            }
+            return $this->product_category_questions;
+        }
+
+        public function get_product_questions( $product_id = null ){
+            if(empty($this->product_questions[$product_id])){
+                $this->product_questions[$product_id] = $this->db_get_product_questions($product_id);
+            }
+            return $this->product_questions[$product_id];
+        }
+
+        // get data
+
+        public function db_get_general_questions()
+        {
+            $raw_data = fw_get_db_settings_option('support_questions',[]);
+
+            $unified_data = [];
+
+            foreach ($raw_data as $group_key => $single_group) {
+
+                $unified_group['group_id']   = '_gg-'.$group_key;
+                $unified_group['type']   = 'general';
+                $unified_group['name'] = !empty($single_group['cat_name']) ? $single_group['cat_name'] : '';
+                $unified_group['icon'] = !empty($single_group['icon']['icon-class']) ? $single_group['icon']['icon-class'] : '';
+
+                if(!empty($single_group['question_answer']) && is_array($single_group['question_answer'])) {
+                    foreach ($single_group['question_answer'] as $qa_key => $qa) {
+
+                        $unified_qa['id']       = '_gqa-'.$group_key.$qa_key;
+                        $unified_qa['question'] = !empty($qa['question']) ? $qa['question'] : '';
+                        $unified_qa['answer']   = !empty($qa['answer']) ? $qa['answer'] : '';
+
+                        $unified_group['qa'][] = $unified_qa;
+                    }
+                }
+
+                $unified_data[] = $unified_group;
+                unset($unified_group);
+            }
+
+            return $unified_data;
+        }
+
+        public function db_get_product_category_questions()
+        {
+            $raw_data = fw_get_db_settings_option('category_questions',[]);
+
+            $unified_data = [];
+
+            foreach ($raw_data as $group_key => $single_group) {
+
+                $product_cat_id = !empty($single_group['cat_id']) ? (int) $single_group['cat_id'] : '';
+                $product_cat = get_term($product_cat_id, 'product_cat');
+
+                if(! ($product_cat instanceof WP_Term)) {
+                    continue;
+                }
+
+                $icon_class = fw_get_db_term_option($product_cat->term_id,'product_cat', 'product_cat_icon','');
+
+                $unified_group['group_id']   = '_pcg-'.$group_key;
+                $unified_group['type']   = 'product_cat';
+                $unified_group['name'] = $product_cat->name;
+                $unified_group['icon'] = $icon_class;
+
+                if(!empty($single_group['question_answer']) && is_array($single_group['question_answer'])) {
+                    foreach ($single_group['question_answer'] as $qa_key => $qa) {
+
+                        $unified_qa['id']       = '_pcqa-'.$group_key.$qa_key;
+                        $unified_qa['question'] = !empty($qa['question']) ? $qa['question'] : '';
+                        $unified_qa['answer']   = !empty($qa['answer']) ? $qa['answer'] : '';
+
+                        $unified_group['qa'][] = $unified_qa;
+                    }
+                }
+
+                $unified_data[] = $unified_group;
+                unset($unified_group);
+            }
+
+            return $unified_data;
+        }
+
+        public function db_get_product_questions($product)
+        {
+            if(! ($product instanceof WC_Product_Simple )){
+                return [];
+            }
+
+            $raw_data = fw_get_db_post_option((int) $product->get_id(),'question_answer',[]);
+
+            $unified_group['group_id'] = '_gp-'.$product->get_id();
+            $unified_group['type']     = 'product';
+            $unified_group['name']     = $product->get_name();
+            $unified_group['icon'] = '';
+
+            foreach ( $product->get_category_ids() as $cat_id ){ // get icon of parent category
+
+                $icon_class = fw_get_db_term_option( $cat_id,'product_cat', 'product_cat_icon','');
+                if(!empty($icon_class)){
+                    $unified_group['icon'] = $icon_class;
+                    break;
+                }
+            }
+
+            if(!empty($raw_data) && is_array($raw_data)) {
+                foreach ($raw_data as $qa_key => $qa) {
+
+                    $unified_qa['id']       = '_pqa-1'.$qa_key;
+                    $unified_qa['question'] = !empty($qa['question']) ? $qa['question'] : '';
+                    $unified_qa['answer']   = !empty($qa['answer']) ? $qa['answer'] : '';
+
+                    $unified_group['qa'][] = $unified_qa;
+                }
+            }
+
+            $unified_data[] = $unified_group;
+
+            unset($unified_group);
+
+
+            return $unified_data;
+        }
+    }
+
+    // find the uri to the shortcode folder
+    $uri = fw_get_template_customizations_directory_uri('/extensions/shortcodes/shortcodes/support_module');
+
+    wp_enqueue_script('support_search', $uri .'/static/js/search.js', array('jquery'), null, true );
+//    wp_enqueue_script('support_search', $uri .'/static/js/search.js', array('jquery-3.2.1'), null, true );
+}
+

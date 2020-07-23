@@ -1,0 +1,205 @@
+.page-header__bottom-nav>ul>li.blue-link {
+    & > a {
+        background-color: #344B8E;
+        color: #fff;
+        &.active {
+            background-color: #2c2c2c;
+        }
+        i {
+            color: inherit;
+        }
+        @media(min-width: 768px){
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+    }
+}
+
+.single-product-support {
+    .support-block__help-wrapper {
+        flex-wrap: wrap;
+        .support-info__tabs-wrapper {
+            flex: 1 1 100%;
+        }
+    }
+
+    @media(min-width:768px) {
+        .support-info__tabs-wrapper {
+            border-bottom: 1px solid #ECECEC;
+            margin-bottom: 10px;
+            .support-info__tabs {
+                overflow: hidden;
+            }
+        }
+        .support-block__right-part {
+            padding-left: 10px;
+            border-left: 8px solid transparent;
+            .support-block__product-card {
+                padding: 20px;
+            }
+        }
+
+    }
+    @media(max-width:767px) {
+        .support-block__help-wrapper {
+            flex-direction: column;
+        }
+        .support-block__tabs-content-wrap {
+            order: 2;
+        }
+        .support-block__right-part {
+            order: 1;
+            position: relative;
+            z-index: 100;
+        }
+        .support-info__tabs-wrapper {
+            display: none;
+        }
+    }
+}
+
+.woocommerce-lost-password {
+    .woocommerce {
+        max-width: 1145px;
+        padding: 2em 15px;
+        margin-left: auto;
+        margin-right: auto;
+        .woocommerce-form-row--first {
+            display: flex;
+            padding: 2em;
+            @media (max-width: 768px){
+                padding: 0;
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+.woocommerce-checkout {
+    .before-checkout-form {
+        text-align: right;
+        a {
+            display: block;
+            margin-bottom: 5px;
+        }
+    }
+    .input-col.col-bil-country {
+        display: none;
+    }
+    
+}
+
+.woocommerce .product__spec-tab-cont {
+    table {
+        width: 100%;
+        max-width: 800px;
+        .b-tabs-content-table-cell_heading {
+            color: #344B8E;
+            font-size: 1.1em;
+            padding: 2em 0 .5em;
+            border-bottom: none;
+            font-weight: 700;
+        }
+        .b-tabs-content-table-cell_value {
+            text-align: right;
+        }
+        td {
+            border-bottom: 1px solid #ddd;
+            padding: .3em 0;
+        }
+    }
+}
+
+.added_to_cart.wc-forward {
+    text-align: center;
+    color: #344B8E;
+    font-size: 13px;
+    height: 54px;
+    display: flex;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    &:hover {
+        text-decoration: none;
+        filter: brightness(70%);
+    }
+}
+
+.single-product {
+    .product__act-row {
+        .product__quant-wrap {
+            margin-right: 10px;
+        }
+    }
+    @media(max-width: 1179px){
+        .added_to_cart.wc-forward {
+            margin-bottom: 20px;
+            border: 1px solid #2c2c2c;
+        }
+
+    }
+}
+
+.item-card {
+    .item-card__button {
+        font-size: 14px;
+    }
+    @media (min-width: 768px) and (max-width: 1169px){
+        .item-card__bottom-buttons {
+            height: auto;
+        }
+    }
+}
+
+.product__spec-tab-cont {
+    .fa.fa-plus {
+        &:after {
+            display: inline-block;
+            content: "+";
+            font-weight: 700;
+            color: #344B8E;
+            margin-left: 3em;
+            font-size: 1.3em;
+        }
+    }
+    .fa.fa-minus {
+        &:after {
+            display: inline-block;
+            content: "\2013";
+            font-weight: 700;
+            color: #344B8E;
+            margin-left: 3em;
+            font-size: 1.3em;
+        }
+    }
+}
+
+.num-container {
+    display: flex;
+    justify-content: space-around;
+    .col {
+        text-align: center;
+    }
+    span {
+        display: block;
+        text-align: center;
+        &.num {
+            font-size: 3.6em;
+            color: #fff;
+            text-shadow: 3px 3px 4px #344B8E;
+            font-weight: 700;
+        }
+        &.num-info {
+            font-size: 1.25em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+    }
+    @media (max-width:767px) {
+        flex-direction: column;
+        .col {
+            margin-bottom: 1em;
+        }
+    }
+}
