@@ -1,0 +1,11 @@
+.warranty-block__adv-item[data-tile-id="1"] .item-icon{
+	pointer-events: none;
+}
+
+.warranty-block__adv-item[data-tile-id="1"] .item-title{
+	pointer-events: none;
+}
+
+.warranty-block__adv-item[data-tile-id="1"] .item-descr{
+	pointer-events: none;
+}

@@ -38,7 +38,7 @@ $options = array(
                 'type' => 'text',
             ),
             'text' => array(
-                'label' => __('Текс', '{domain}'),
+                'label' => __('Текст', '{domain}'),
                 'type' => 'textarea',
             ),
         ),

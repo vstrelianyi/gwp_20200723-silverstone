@@ -25,7 +25,7 @@ $options = array(
             ),
             'text_delivery' =>array(
                 'type'  => 'wp-editor',
-                'label' => __('Текст достави', '{domain}'),
+                'label' => __('Текст доставки', '{domain}'),
             ),
             'title' => array(
                 'label' => __('Заголовок оплаты', '{domain}'),

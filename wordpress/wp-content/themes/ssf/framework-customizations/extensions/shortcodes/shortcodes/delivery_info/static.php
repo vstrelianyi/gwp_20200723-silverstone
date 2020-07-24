@@ -6,4 +6,3 @@ wp_enqueue_style(
 	$shortcodes_extension->get_declared_URI('/shortcodes/icon/static/css/styles.css'),
 	array('font-awesome')
 );
-
