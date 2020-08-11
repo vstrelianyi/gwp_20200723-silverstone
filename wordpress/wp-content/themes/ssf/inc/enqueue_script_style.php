@@ -34,7 +34,6 @@ function ssf_scripts()
 
     wp_enqueue_script('plugins.min', get_template_directory_uri() .'/assets/js/plugins.min.js', array(), null, true );
 		wp_enqueue_script('scripts.min', get_template_directory_uri() .'/assets/js/scripts.min.js', array(), null, true );
-		wp_enqueue_script('repair-js', get_template_directory_uri() .'/assets/js/repair.js', array(), null, true );
     wp_enqueue_script('custom-js', get_template_directory_uri() .'/js/custom.js', array(), null, true );
     wp_enqueue_script('ajax-comment', get_template_directory_uri() .'/js/ajax-comment.js', array('scripts.min'), null, true );
 
@@ -48,7 +47,9 @@ function ssf_scripts()
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
-    }
+		}
+
+		wp_enqueue_script('repair-js', get_template_directory_uri() .'/assets/js/repair.js', array('scripts.min'), null, true );
 }
 
 add_action('wp_enqueue_scripts', 'ssf_scripts');

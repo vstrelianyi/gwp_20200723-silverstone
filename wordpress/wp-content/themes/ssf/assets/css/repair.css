@@ -1,11 +1,149 @@
-.warranty-block__adv-item[data-tile-id="1"] .item-icon{
+.warranty-block__adv-list{
+	flex-wrap: wrap;
+}
+
+.warranty-block__adv-item[data-tile-id="3"] {
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.warranty-block__adv-item[data-tile-id="3"] .item-icon{
+	width: 100%;
+}
+
+@media( min-width: 768px ){
+	.warranty-block__adv-item[data-tile-id="3"] .item-icon{
+		width: auto;
+		margin-right: 30px;
+	}
+}
+
+/* title */
+.warranty-block__adv-item[data-tile-id="3"] .item-title{
+}
+
+/* descr */
+.warranty-block__adv-item[data-tile-id="3"] .item-descr{
+	flex: 1 1 auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.warranty-block__adv-item[data-tile-id="3"] .item-descr .left{
+	flex: 1 1 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.warranty-block__adv-item[data-tile-id="3"] .item-descr .right{
+	flex: 0 0 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+@media( min-width: 768px ){
+	.warranty-block__adv-item[data-tile-id="3"] .item-descr .left{
+		flex: 1 1 auto;
+		align-items: flex-start;
+	}
+	.warranty-block__adv-item[data-tile-id="3"] .item-descr .right{
+		flex: 0 0 auto;
+	}
+}
+
+.warranty-block__adv-item[data-tile-id="3"] .item-descr p{
+	margin: 0;
+}
+
+.warranty-block__adv-item[data-tile-id="3"] .item-descr button{
+	background-color: #344b8e;
+	color: #fff;
+	border: none;
+	padding: 10px 30px;
+	cursor: pointer;
+}
+
+/*
+	MODAL
+*/
+.modal{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 51;
+	background-color: rgba(52, 75, 142, 0.5);
+	display: none;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal.active{
+	display: flex;
+}
+
+.modal .modal-content{
+	width: 500px;
+	position: relative;
+}
+
+.modal .modal-content button.modal-close{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	padding: 0;
+	cursor: pointer;
+}
+
+.modal .modal-content button.modal-close svg{
 	pointer-events: none;
 }
 
-.warranty-block__adv-item[data-tile-id="1"] .item-title{
-	pointer-events: none;
+.modal .modal-content form{
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 50px 100px;
 }
 
-.warranty-block__adv-item[data-tile-id="1"] .item-descr{
-	pointer-events: none;
+.modal .modal-content form input{
+	margin-bottom: 20px;
+	padding: 10px 15px;
 }
+
+.modal .modal-content form textarea{
+	margin-bottom: 20px;
+	padding: 10px 15px;
+	resize: none;
+}
+
+.modal .modal-content form .button-wrapper{
+	display: flex;
+	border: 1px solid grey;
+	border-radius: 20px;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.modal .modal-content form .button-wrapper input[type="button"]{
+	background-color: #344b8e;
+	color: #fff;
+	border: none;
+	padding: 10px 30px;
+	cursor: pointer;
+	margin-bottom: 0px;
+	position: relative;
+	box-shadow: 0px 0px 100px 7px rgba(0,0,0,0.75);
+}
+

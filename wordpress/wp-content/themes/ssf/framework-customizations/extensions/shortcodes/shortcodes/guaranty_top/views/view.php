@@ -36,7 +36,9 @@
             ?>
             <div class="warranty-block__adv-item" data-tile-id="<?php echo $idx?>">
                 <div class="item-icon"><i class="<?php echo !empty($tile['icon']['icon-class']) ? $tile['icon']['icon-class'] : '';?>"></i></div>
-                <div class="item-title"><?php echo !empty($tile['title']) ? $tile['title'] : '';?></div>
+								<?php if (!empty( $tile['title'] ) ): ?>
+								<div class="item-title"><?php echo !empty($tile['title']) ? $tile['title'] : '';?></div>
+								<?php endif; ?>
                 <div class="item-descr"><?php echo !empty($tile['text']) ? $tile['text'] : '';?></div>
             </div>
 						<?php
